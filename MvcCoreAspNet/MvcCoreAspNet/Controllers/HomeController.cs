@@ -12,7 +12,17 @@ namespace MvcCoreAspNet.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            var filme = new Filme
+            {
+                Titulo = "oi",
+                DataLancamento = DateTime.Now,
+                Genero =  null,
+                Avaliacao = 10,
+                Valor = 20000
+            };
+
+            return RedirectToAction("Privacy", filme);
+            //return View();
         }
 
         public IActionResult About()
@@ -29,8 +39,18 @@ namespace MvcCoreAspNet.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Privacy(Filme filme)
         {
+            if (ModelState.IsValid)
+            {
+
+            }
+
+            foreach(var error in ModelState.Values.SelectMany(m => m.Errors))
+            {
+                Console.WriteLine(error.ErrorMessage);
+            }
+
             return View();
         }
 
